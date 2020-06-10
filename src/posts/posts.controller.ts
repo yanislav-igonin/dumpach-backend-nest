@@ -1,7 +1,8 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
+import { Post } from './interfaces';
 
-@Controller('posts')
+@Controller()
 export class PostsController {
   constructor(private postsService: PostsService) {}
 
@@ -9,5 +10,8 @@ export class PostsController {
   async getPosts(
     @Param('boardId') boardId: string,
     @Param('threadId', ParseIntPipe) threadId: number,
-  ) {}
+  ): Promise<Post[]> {
+    const posts = await this.postsService.getPosts(boardId, threadId);
+    return posts;
+  }
 }
