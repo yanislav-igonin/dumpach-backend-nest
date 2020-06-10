@@ -1,19 +1,19 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { BoardsService } from './boards.service';
-import { Board } from './interfaces';
+import { BoardEntity } from './entities/board.entity';
 
 @Controller()
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
   @Get()
-  async getBoards(): Promise<Board[]> {
+  async getBoards(): Promise<BoardEntity[]> {
     const boards = await this.boardsService.getBoards();
     return boards;
   }
 
   @Get(':boardId')
-  async getBoardById(@Param('boardId') boardId: string): Promise<Board> {
+  async getBoardById(@Param('boardId') boardId: string): Promise<BoardEntity> {
     const board = await this.boardsService.getBoardById(boardId);
     return board;
   }

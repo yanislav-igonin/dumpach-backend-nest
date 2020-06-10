@@ -1,12 +1,13 @@
-import { Board } from '../interfaces';
+import { BoardEntity } from '../entities/board.entity';
 
 const boardsIds = ['b', 'dev', 'porn'];
 
-const getBoards = (): Board[] => {
+const getBoards = (): BoardEntity[] => {
   return boardsIds.map(id => ({
     id,
-    createdAt: `${new Date().toISOString()}`,
+    createdAt: new Date(),
     maxThreads: 50,
+    isActive: true,
   }));
 };
 
