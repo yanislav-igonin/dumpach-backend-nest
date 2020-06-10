@@ -1,0 +1,32 @@
+import { Injectable } from '@nestjs/common';
+import { threads } from './mocks';
+import { Thread } from './interfaces';
+
+@Injectable()
+export class ThreadsService {
+  private readonly threads = threads;
+
+  async getThreads(boardId: string, pageId: number): Promise<Thread[]> {
+    const threads = this.threads[boardId].sort((t1, t2) => {
+      if (t1.updated_at > t2.updated_at) return 1;
+      if (t1.updated_at < t2.updated_at) return -1;
+      return 0;
+    });
+
+    return threads.slice(10 * pageId, 10 * pageId + 10);
+  }
+
+  async getThreadById(boardId: string, threadId: number): Promise<Thread> {
+    const thread = this.threads[boardId].find(t => {
+      if (t.board_id === boardId && t.id === threadId) return true;
+      return false;
+    });
+
+    return thread;
+  }
+
+  async createThread(boardId: string, data: Thread): Promise<Thread> {
+    this.threads[boardId].push(data);
+    return data;
+  }
+}
