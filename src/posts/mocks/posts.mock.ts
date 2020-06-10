@@ -1,6 +1,7 @@
 import { boards } from '../../boards/mocks';
-import { threads } from '../../threads/mocks';
+import { threads as threadsMap } from '../../threads/mocks';
 import { Post } from '../interfaces';
+import { Thread } from '../../threads/interfaces';
 
 const getPost = (threadId: number, postId: number): Post => ({
   title: `Post №${postId}`,
@@ -10,27 +11,45 @@ const getPost = (threadId: number, postId: number): Post => ({
   isSage: false,
 });
 
-const getPosts = () => {
-  const postsMap = boards.map(b => {
-    return threads[b.id].reduce((acc, t) => {
-      const posts = [];
-      for (
-        let postIndex = 1;
-        postIndex <= threads[b.id].length * b.maxThreads;
-        postIndex++
-      ) {
-        posts.push(getPost(t.id, postIndex));
-      }
 
-      acc[b.id][t.id] = posts;
+/**
+ * {
+ *  b: [[Post[]], [Post[]]]
+ * }
+ */
+// const getPosts = (): Record<string, Array<Post[]>> => {
+//   const postsMap = boards.reduce((acc, board) => {
+//     acc[board.id] = [];
 
-      return acc;
-    }, {});
-  });
+//     const threads = threadsMap[board.id];
+//     const postIndex = 1;
 
-  return postsMap;
+//     const posts = threads.map((thread) => {
+//       for (let postPerThreadCount = 1; postPerThreadCount <= 500; postPerThreadCount++) {
+
+//       }
+//     })
+
+//     return acc;
+//   }, {});
+
+//   return postsMap
+// };
+
+// const posts = getPosts();
+const posts: Record<string, Array<Post[]>> = {
+  b: [
+    [getPost(1, 1), getPost(1, 2)],
+    [getPost(2, 3), getPost(2, 4)],
+  ],
+  dev: [
+    [getPost(1, 1), getPost(1, 2)],
+    [getPost(2, 3), getPost(2, 4)],
+  ],
+  porn: [
+    [getPost(1, 1), getPost(1, 2)],
+    [getPost(2, 3), getPost(2, 4)],
+  ],
 };
-
-const posts = getPosts();
 
 export { posts };
