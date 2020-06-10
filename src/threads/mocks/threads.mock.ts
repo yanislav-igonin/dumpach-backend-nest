@@ -1,6 +1,5 @@
+import { boards } from '../../boards/mocks'
 import { Thread, Post } from '../interfaces';
-
-const boards = ['b', 'dev', 'porn'];
 
 const getPost = (threadId: number, postId: number): Post => ({
   created_at: `${new Date()}`,
@@ -29,10 +28,10 @@ const getThreads = (): Record<string, Thread[]> => {
   const threadsMap = boards.reduce((acc, b) => {
     const threads: Thread[] = [];
     for (let threadIndex = 1; threadIndex <= 50; threadIndex++) {
-      threads.push(getThread(b, threadIndex));
+      threads.push(getThread(b.id, threadIndex));
     }
 
-    acc[b] = threads;
+    acc[b.id] = threads;
 
     return acc;
   }, {});
