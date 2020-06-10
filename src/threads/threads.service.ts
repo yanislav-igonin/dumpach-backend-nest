@@ -8,8 +8,8 @@ export class ThreadsService {
 
   async getThreads(boardId: string, pageId: number): Promise<Thread[]> {
     const threads = this.threads[boardId].sort((t1, t2) => {
-      if (t1.updated_at > t2.updated_at) return 1;
-      if (t1.updated_at < t2.updated_at) return -1;
+      if (t1.updatedAt > t2.updatedAt) return 1;
+      if (t1.updatedAt < t2.updatedAt) return -1;
       return 0;
     });
 
