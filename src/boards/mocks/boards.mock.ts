@@ -5,7 +5,7 @@ const boardsIds = ['b', 'dev', 'porn'];
 const getBoards = (): Board[] => {
   return boardsIds.map(id => ({
     id,
-    createdAt: `${new Date()}`,
+    createdAt: `${(new Date()).toISOString()}`,
     maxThreads: 50,
   }));
 };
