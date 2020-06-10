@@ -11,7 +11,6 @@ const getPost = (threadId: number, postId: number): Post => ({
   isSage: false,
 });
 
-
 /**
  * {
  *  b: [[Post[]], [Post[]]]
