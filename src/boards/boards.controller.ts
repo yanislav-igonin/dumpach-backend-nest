@@ -2,7 +2,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './interfaces';
 
-@Controller('boards')
+@Controller()
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 

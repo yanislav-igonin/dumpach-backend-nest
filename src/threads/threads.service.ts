@@ -16,15 +16,6 @@ export class ThreadsService {
     return threads.slice(10 * pageId, 10 * pageId + 10);
   }
 
-  async getThreadById(boardId: string, threadId: number): Promise<Thread> {
-    const thread = this.threads[boardId].find(t => {
-      if (t.board_id === boardId && t.id === threadId) return true;
-      return false;
-    });
-
-    return thread;
-  }
-
   async createThread(boardId: string, data: Thread): Promise<Thread> {
     this.threads[boardId].push(data);
     return data;

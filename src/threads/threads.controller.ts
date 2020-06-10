@@ -3,33 +3,25 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  DefaultValuePipe,
   Post,
   Body,
+  Query,
 } from '@nestjs/common';
 import { ThreadsService } from './threads.service';
 import { Thread } from './interfaces';
 
-@Controller('threads')
+@Controller()
 export class ThreadsController {
   constructor(private threadsService: ThreadsService) {}
 
-  @Get(':boardId/:pageId')
+  @Get()
   async getThreads(
     @Param('boardId') boardId: string,
-    @Param('pageId', ParseIntPipe) pageId: number,
+    @Query('page', new DefaultValuePipe(0), ParseIntPipe) pageId: number,
   ): Promise<Thread[]> {
     const threads = await this.threadsService.getThreads(boardId, pageId);
     return threads;
-  }
-
-  @Get(':boardId/threads/:threadId')
-  async getThreadById(
-    @Param('boardId') boardId: string,
-    @Param('threadId', ParseIntPipe) threadId: number,
-  ): Promise<Thread> {
-    const thread = await this.threadsService.getThreadById(boardId, threadId);
-    console.log('DEBUG: ThreadsController -> constructor -> thread', thread);
-    return thread;
   }
 
   @Post()
