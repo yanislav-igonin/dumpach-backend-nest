@@ -10,8 +10,10 @@ bootstrap();
 /**
  * GET /boards - list of all boards
  * GET /boards/:boardId - board info
+ *
  * GET /boards/:boardId/threads?page=1 - threads list
  * POST /boards/:boardId/threads - create thread
+ *
  * GET /boards/:boardId/threads/:threadId/posts - posts for thread
  * POST /boards/:boardId/threads/:threadId/posts - create post in thread
  */
