@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { boards } from './mocks';
-import { BoardEntity } from './entities/board.entity';
+import { BoardEntity } from './entities';
 
 @Injectable()
 export class BoardsService {

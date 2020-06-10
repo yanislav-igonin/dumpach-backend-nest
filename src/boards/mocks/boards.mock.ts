@@ -1,4 +1,4 @@
-import { BoardEntity } from '../entities/board.entity';
+import { BoardEntity } from '../entities';
 
 const boardsIds = ['b', 'dev', 'porn'];
 
