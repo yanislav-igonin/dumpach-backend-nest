@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      POSTGRES_URL: postgres://dumpach:test_password@postgres/dumpach
+    depends_on:
+      - postgres
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:3000
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: dumpach
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: dumpach
