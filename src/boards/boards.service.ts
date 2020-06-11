@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BoardEntity } from './entities';
@@ -16,6 +16,7 @@ export class BoardsService {
 
   async getBoardById(boardId: string): Promise<BoardEntity> {
     const board = await this.boardsRepository.findOne(boardId);
+    if (board === undefined) throw new NotFoundException('Board Not Found');
     return board || null;
   }
 }
