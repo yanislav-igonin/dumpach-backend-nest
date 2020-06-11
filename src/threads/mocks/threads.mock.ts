@@ -1,18 +1,18 @@
 import { boards } from '../../boards/mocks';
-import { Thread } from '../interfaces';
+import { ThreadEntity } from '../entities';
 
-const getThread = (boardId: string, threadId: number): Thread => {
+const getThread = (boardId: string, threadId: number): ThreadEntity => {
   return {
     id: threadId,
-    createdAt: `${new Date().toISOString()}`,
-    updatedAt: `${new Date().toISOString()}`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
     boardId,
   };
 };
 
-const getThreads = (): Record<string, Thread[]> => {
+const getThreads = (): Record<string, ThreadEntity[]> => {
   const threadsMap = boards.reduce((acc, b) => {
-    const threads: Thread[] = [];
+    const threads: ThreadEntity[] = [];
     for (let threadIndex = 1; threadIndex <= 50; threadIndex++) {
       threads.push(getThread(b.id, threadIndex));
     }

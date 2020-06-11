@@ -9,7 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ThreadsService } from './threads.service';
-import { Thread } from './interfaces';
+import { ThreadEntity } from './entities';
 
 @Controller()
 export class ThreadsController {
@@ -19,7 +19,7 @@ export class ThreadsController {
   async getThreads(
     @Param('boardId') boardId: string,
     @Query('page', new DefaultValuePipe(0), ParseIntPipe) pageId: number,
-  ): Promise<Thread[]> {
+  ): Promise<ThreadEntity[]> {
     const threads = await this.threadsService.getThreads(boardId, pageId);
     return threads;
   }
