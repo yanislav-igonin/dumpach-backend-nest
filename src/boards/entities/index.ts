@@ -1,5 +1,3 @@
 import { BoardEntity } from './board.entity';
 
-export {
-  BoardEntity,
-};
+export { BoardEntity };
