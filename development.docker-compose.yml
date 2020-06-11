@@ -22,3 +22,5 @@ services:
       POSTGRES_USER: dumpach
       POSTGRES_PASSWORD: test_password
       POSTGRES_DB: dumpach
+    ports:
+      - 5432:5432
