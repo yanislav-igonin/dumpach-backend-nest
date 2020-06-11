@@ -4,8 +4,8 @@ import {
   Param,
   ParseIntPipe,
   DefaultValuePipe,
-  Post,
-  Body,
+  // Post,
+  // Body,
   Query,
 } from '@nestjs/common';
 import { ThreadsService } from './threads.service';
@@ -19,13 +19,13 @@ export class ThreadsController {
   async getThreads(
     @Param('boardId') boardId: string,
     @Query('page', new DefaultValuePipe(0), ParseIntPipe) pageId: number,
-  ): Promise<ThreadEntity[]> {
+  ): Promise<{ threads: ThreadEntity[] }> {
     const threads = await this.threadsService.getThreads(boardId, pageId);
-    return threads;
+    return { threads };
   }
 
-  @Post()
-  async createThread(@Body() createThreadDto) {
-    return {};
-  }
+  // @Post()
+  // async createThread(@Body() createThreadDto) {
+  //   return {};
+  // }
 }
