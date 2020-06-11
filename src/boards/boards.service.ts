@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { boards } from './mocks';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { BoardEntity } from './entities';
 
 @Injectable()
 export class BoardsService {
-  private readonly boards = boards;
+  constructor (
+    @InjectRepository(BoardEntity)
+    private boardsRepository: Repository<BoardEntity>,
+  ) {}
 
   async getBoards(): Promise<BoardEntity[]> {
-    return this.boards;
+    return this.boardsRepository.find();
   }
 
   async getBoardById(boardId: string): Promise<BoardEntity> {
-    return this.boards.filter(b => b.id === boardId)[0];
+    const board = await this.boardsRepository.findOne(boardId);
+    return board || null;
   }
 }

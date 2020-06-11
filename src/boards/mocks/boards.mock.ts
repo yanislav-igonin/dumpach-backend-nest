@@ -6,7 +6,7 @@ const getBoards = (): BoardEntity[] => {
   return boardsIds.map(id => ({
     id,
     createdAt: new Date(),
-    maxThreads: 50,
+    maxThreadsCount: 50,
     isActive: true,
   }));
 };

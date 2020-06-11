@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { BoardEntity } from './entities';
 
@@ -7,14 +7,15 @@ export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
   @Get()
-  async getBoards(): Promise<BoardEntity[]> {
+  async getBoards(): Promise<{ boards: BoardEntity[] }> {
     const boards = await this.boardsService.getBoards();
-    return boards;
+    return { boards };
   }
 
   @Get(':boardId')
   async getBoardById(@Param('boardId') boardId: string): Promise<BoardEntity> {
     const board = await this.boardsService.getBoardById(boardId);
+    if (board === null) throw new NotFoundException('Board Not Found');
     return board;
   }
 }

@@ -16,5 +16,5 @@ export class BoardEntity {
   createdAt: Date;
 
   @Column({ name: 'max_threads_count' })
-  maxThreads: number;
+  maxThreadsCount: number;
 }
