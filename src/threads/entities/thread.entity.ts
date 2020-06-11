@@ -21,4 +21,6 @@ export class ThreadEntity {
     name: 'updated_at',
   })
   updatedAt: Date;
+
+  // TODO: add boards constraint
 }
