@@ -1,12 +1,14 @@
-import { PrimaryGeneratedColumn, Column, Entity,CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Entity,CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { BoardEntity } from '../../boards/entities';
 
 @Entity({ name: 'threads' })
 export class ThreadEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'board_id ' })
-  boardId: string;
+  @ManyToOne(type => BoardEntity, board => board.threads)
+  @JoinColumn({ name: 'board_id' })
+  boardId: BoardEntity;
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -21,6 +23,4 @@ export class ThreadEntity {
     name: 'updated_at',
   })
   updatedAt: Date;
-
-  // TODO: add boards constraint
 }

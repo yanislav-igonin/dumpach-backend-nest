@@ -1,4 +1,5 @@
-import { PrimaryColumn, Column, CreateDateColumn, Entity } from 'typeorm';
+import { PrimaryColumn, Column, CreateDateColumn, Entity, OneToMany } from 'typeorm';
+import { ThreadEntity } from '../../threads/entities';
 
 @Entity({ name: 'boards' })
 export class BoardEntity {
@@ -17,4 +18,8 @@ export class BoardEntity {
 
   @Column({ name: 'max_threads_count' })
   maxThreadsCount: number;
+
+  // @Column({ name: 'threads' })
+  @OneToMany(type => ThreadEntity, thread => thread.boardId)
+  threads: ThreadEntity[];
 }
