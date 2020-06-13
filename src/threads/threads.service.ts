@@ -6,7 +6,7 @@ import { ThreadEntity } from './entities';
 
 @Injectable()
 export class ThreadsService {
-  constructor (
+  constructor(
     @InjectRepository(BoardEntity)
     private boardsRepository: Repository<BoardEntity>,
     @InjectRepository(ThreadEntity)
@@ -19,7 +19,7 @@ export class ThreadsService {
     if (board === undefined) throw new NotFoundException('Board Not Found');
 
     const threads = await this.threadsRepository.find({
-      where: { 
+      where: {
         boardId,
       },
       order: {
@@ -29,7 +29,7 @@ export class ThreadsService {
     });
 
     return threads;
-  };
+  }
 
   // async createThread(boardId: string, data: ThreadEntity): Promise<ThreadEntity> {
   //   // this.threads[boardId].push(data);

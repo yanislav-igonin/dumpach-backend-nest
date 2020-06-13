@@ -5,7 +5,7 @@ import { BoardEntity } from './entities';
 
 @Injectable()
 export class BoardsService {
-  constructor (
+  constructor(
     @InjectRepository(BoardEntity)
     private boardsRepository: Repository<BoardEntity>,
   ) {}
