@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RouterModule, Routes } from 'nest-router';
 import * as path from 'path';
-import { ThreadsModule } from './threads/threads.module';
-import { BoardsModule } from './boards/boards.module';
-import { PostsModule } from './posts/posts.module';
+import { ThreadsModule } from './modules/threads/threads.module';
+import { BoardsModule } from './modules/boards/boards.module';
+import { PostsModule } from './modules/posts/posts.module';
 import { config } from './config';
 
 const routes: Routes = [
