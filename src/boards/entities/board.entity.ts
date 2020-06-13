@@ -25,7 +25,6 @@ export class BoardEntity {
   @Column({ name: 'max_threads_count' })
   maxThreadsCount: number;
 
-  // @Column({ name: 'threads' })
   @OneToMany(
     type => ThreadEntity,
     thread => thread.boardId,
