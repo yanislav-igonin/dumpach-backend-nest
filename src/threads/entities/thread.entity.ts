@@ -4,9 +4,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToMany,
   JoinColumn,
 } from 'typeorm';
 import { BoardEntity } from '../../boards/entities';
+import { PostEntity } from '../../posts/entities';
 
 @Entity({ name: 'threads' })
 export class ThreadEntity {
@@ -33,4 +35,10 @@ export class ThreadEntity {
     name: 'updated_at',
   })
   updatedAt: Date;
+
+  @OneToMany(
+    type => PostEntity,
+    post => post.threadId,
+  )
+  posts: PostEntity[];
 }

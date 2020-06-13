@@ -1,20 +1,39 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { posts } from './mocks';
-import { Post } from './interfaces';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { BoardEntity } from '../boards/entities';
+import { ThreadEntity } from '../threads/entities';
+import { PostEntity } from './entities';
 
 @Injectable()
 export class PostsService {
-  private readonly posts = posts;
+  constructor(
+    @InjectRepository(BoardEntity)
+    private boardsRepository: Repository<BoardEntity>,
+    @InjectRepository(ThreadEntity)
+    private threadsRepository: Repository<ThreadEntity>,
+    @InjectRepository(PostEntity)
+    private postsRepository: Repository<PostEntity>,
+  ) {}
 
-  async getPosts(boardId: string, threadId: number): Promise<Post[]> {
-    const isBoardExists = this.posts[boardId] !== undefined;
+  async getPosts(boardId: string, threadId: number): Promise<PostEntity[]> {
+    const board = await this.boardsRepository.findOne(boardId);
 
-    if (!isBoardExists) throw new NotFoundException();
+    if (board === undefined) throw new NotFoundException('Board Not Found');
 
-    const isThreadExists = this.posts[boardId][threadId] !== undefined;
+    const thread = await this.threadsRepository.findOne(threadId);
 
-    if (!isThreadExists) throw new NotFoundException();
+    if (thread === undefined) throw new NotFoundException('Thread Not Found');
 
-    return this.posts[boardId][threadId];
+    const posts = await this.postsRepository.find({ 
+      where: {
+        threadId,
+      },
+      order: {
+        createdAt: 'ASC',
+      },
+    });
+
+    return posts;
   }
 }

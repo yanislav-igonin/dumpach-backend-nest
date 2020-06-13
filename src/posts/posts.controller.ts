@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { Post } from './interfaces';
+import { PostEntity } from './entities';
 
 @Controller()
 export class PostsController {
@@ -10,7 +10,7 @@ export class PostsController {
   async getPosts(
     @Param('boardId') boardId: string,
     @Param('threadId', ParseIntPipe) threadId: number,
-  ): Promise<Post[]> {
+  ): Promise<PostEntity[]> {
     const posts = await this.postsService.getPosts(boardId, threadId);
     return posts;
   }

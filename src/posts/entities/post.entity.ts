@@ -6,7 +6,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { BoardEntity } from '../../boards/entities';
 import { ThreadEntity } from '../../threads/entities';
 
 @Entity({ name: 'posts' })
@@ -22,13 +21,6 @@ export class PostEntity {
 
   @Column({ name: 'is_sage' })
   isSage: boolean;
-
-  @ManyToOne(
-    () => BoardEntity,
-    board => board.threads,
-  )
-  @JoinColumn({ name: 'board_id' })
-  boardId: BoardEntity;
 
   @ManyToOne(
     () => ThreadEntity,
