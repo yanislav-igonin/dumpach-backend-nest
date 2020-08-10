@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BoardEntity } from '../boards/entities';
+import { PostEntity } from '../posts/entities';
 import { ThreadEntity } from './entities';
 
 @Injectable()
@@ -11,6 +12,8 @@ export class ThreadsService {
     private boardsRepository: Repository<BoardEntity>,
     @InjectRepository(ThreadEntity)
     private threadsRepository: Repository<ThreadEntity>,
+    @InjectRepository(PostEntity)
+    private postsRepository: Repository<PostEntity>,
   ) {}
 
   async getThreads(boardId: string, pageId: number): Promise<ThreadEntity[]> {
@@ -31,8 +34,16 @@ export class ThreadsService {
     return threads;
   }
 
-  // async createThread(boardId: string, data: ThreadEntity): Promise<ThreadEntity> {
-  //   // this.threads[boardId].push(data);
-  //   return ThreadEntity;
-  // }
+  async createThread(boardId: string, threadData: { post: PostEntity }): Promise<number> {
+    const board = await this.boardsRepository.findOne(boardId);
+
+    if (board === undefined) throw new NotFoundException('Board Not Found');
+
+    const result = await this.threadsRepository.insert({ boardId: board });
+    console.log('DEBUG: ThreadsService -> result', result);
+
+    // TODO: add post inserting
+
+    return 1;
+  }
 }

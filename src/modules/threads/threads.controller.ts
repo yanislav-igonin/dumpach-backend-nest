@@ -4,10 +4,14 @@ import {
   Param,
   ParseIntPipe,
   DefaultValuePipe,
-  // Post,
-  // Body,
+  Post,
   Query,
+  UseInterceptors,
+  UploadedFiles,
+  Body,
 } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
+
 import { ThreadsService } from './threads.service';
 import { ThreadEntity } from './entities';
 
@@ -24,8 +28,11 @@ export class ThreadsController {
     return { threads };
   }
 
-  // @Post()
-  // async createThread(@Body() createThreadDto) {
-  //   return {};
-  // }
+  @Post()
+  @UseInterceptors(FilesInterceptor('files', 5))
+  async createThread(@UploadedFiles() files, @Body() body): Promise<number> {
+    console.log('DEBUG: files', files);
+    console.log('DEBUG: body', body);
+    return 1;
+  }
 }

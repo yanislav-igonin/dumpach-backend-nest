@@ -9,7 +9,4 @@ export class CreateThreadDto {
 
   @IsBoolean()
   isSage: boolean;
-
-  @IsArray()
-  files: string[];
 }
