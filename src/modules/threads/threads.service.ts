@@ -39,11 +39,12 @@ export class ThreadsService {
 
     if (board === undefined) throw new NotFoundException('Board Not Found');
 
-    const result = await this.threadsRepository.insert({ boardId: board });
-    console.log('DEBUG: ThreadsService -> result', result);
+    const thread = await this.threadsRepository.create({ boardId: board });
 
-    // TODO: add post inserting
+    const post = await this.postsRepository.create(threadData.post)
 
-    return 1;
+    // TODO: Add files parsing
+
+    return thread.id;
   }
 }
