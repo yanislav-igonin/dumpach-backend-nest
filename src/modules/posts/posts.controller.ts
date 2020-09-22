@@ -1,6 +1,5 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { PostEntity } from './entities';
 
 @Controller()
 export class PostsController {

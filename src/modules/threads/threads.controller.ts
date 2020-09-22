@@ -13,7 +13,6 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express';
 
 import { ThreadsService } from './threads.service';
-import { ThreadEntity } from './entities';
 
 @Controller()
 export class ThreadsController {
