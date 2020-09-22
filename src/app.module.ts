@@ -30,13 +30,13 @@ const routes: Routes = [
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: config.postgresUrl,
+      url: config.db.url,
       entities: [path.join(__dirname, '**', '*.entity.{ts,js}')],
       migrationsTableName: 'migrations',
       migrations: ['src/migrations/*.ts'],
-      ssl: config.env === 'production',
-      synchronize: config.env !== 'production',
-      logging: config.env !== 'production',
+      ssl: config.app.env === 'production',
+      synchronize: config.app.env !== 'production',
+      logging: config.app.env !== 'production',
     }),
     RouterModule.forRoutes(routes),
     BoardsModule,
