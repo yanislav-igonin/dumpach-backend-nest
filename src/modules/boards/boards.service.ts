@@ -10,13 +10,13 @@ export class BoardsService {
     private boardsRepository: Repository<BoardEntity>,
   ) {}
 
-  async getBoards(): Promise<BoardEntity[]> {
+  async getBoards() {
     return this.boardsRepository.find();
   }
 
-  async getBoardById(boardId: string): Promise<BoardEntity> {
+  async getBoardById(boardId: string) {
     const board = await this.boardsRepository.findOne(boardId);
     if (board === undefined) throw new NotFoundException('Board Not Found');
-    return board || null;
+    return board;
   }
 }

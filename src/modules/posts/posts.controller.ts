@@ -10,7 +10,7 @@ export class PostsController {
   async getPosts(
     @Param('boardId') boardId: string,
     @Param('threadId', ParseIntPipe) threadId: number,
-  ): Promise<PostEntity[]> {
+  ) {
     const posts = await this.postsService.getPosts(boardId, threadId);
     return posts;
   }

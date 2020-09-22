@@ -23,14 +23,14 @@ export class ThreadsController {
   async getThreads(
     @Param('boardId') boardId: string,
     @Query('page', new DefaultValuePipe(0), ParseIntPipe) pageId: number,
-  ): Promise<{ threads: ThreadEntity[] }> {
+  ) {
     const threads = await this.threadsService.getThreads(boardId, pageId);
     return { threads };
   }
 
   @Post()
   @UseInterceptors(FilesInterceptor('files', 5))
-  async createThread(@UploadedFiles() files, @Body() body): Promise<number> {
+  async createThread(@UploadedFiles() files, @Body() body) {
     console.log('DEBUG: files', files);
     console.log('DEBUG: body', body);
     return 1;

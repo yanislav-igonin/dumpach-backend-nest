@@ -16,7 +16,7 @@ export class PostsService {
     private postsRepository: Repository<PostEntity>,
   ) {}
 
-  async getPosts(boardId: string, threadId: number): Promise<PostEntity[]> {
+  async getPosts(boardId: string, threadId: number) {
     const board = await this.boardsRepository.findOne(boardId);
 
     if (board === undefined) throw new NotFoundException('Board Not Found');

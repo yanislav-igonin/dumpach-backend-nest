@@ -7,13 +7,13 @@ export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
   @Get()
-  async getBoards(): Promise<{ boards: BoardEntity[] }> {
+  async getBoards() {
     const boards = await this.boardsService.getBoards();
     return { boards };
   }
 
   @Get(':boardId')
-  async getBoardById(@Param('boardId') boardId: string): Promise<BoardEntity> {
+  async getBoardById(@Param('boardId') boardId: string) {
     const board = await this.boardsService.getBoardById(boardId);
     return board;
   }

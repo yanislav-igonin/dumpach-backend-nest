@@ -16,7 +16,7 @@ export class ThreadsService {
     private postsRepository: Repository<PostEntity>,
   ) {}
 
-  async getThreads(boardId: string, pageId: number): Promise<ThreadEntity[]> {
+  async getThreads(boardId: string, pageId: number) {
     const board = await this.boardsRepository.findOne(boardId);
 
     if (board === undefined) throw new NotFoundException('Board Not Found');
@@ -34,7 +34,7 @@ export class ThreadsService {
     return threads;
   }
 
-  async createThread(boardId: string, threadData: { post: PostEntity }): Promise<number> {
+  async createThread(boardId: string, threadData: { post: PostEntity }) {
     const board = await this.boardsRepository.findOne(boardId);
 
     if (board === undefined) throw new NotFoundException('Board Not Found');
